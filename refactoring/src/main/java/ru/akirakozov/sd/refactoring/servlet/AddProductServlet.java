@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AddProductServlet extends AbstractHtmlServlet {
     @Override
-    protected CommonDTO getCommonDTO(HttpServletRequest request) {
+    protected CommonDTO action(HttpServletRequest request) {
         Product product = new Product(
                 request.getParameter("name"),
                 Long.parseLong(request.getParameter("price"))

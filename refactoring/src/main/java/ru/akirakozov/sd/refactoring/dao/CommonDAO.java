@@ -49,7 +49,7 @@ public class CommonDAO {
 
     public static void insertIntoProductTable(Product product) {
         String sql = "INSERT INTO PRODUCT " +
-                "(NAME, PRICE) VALUES (\"" + product.name + "\"," + product.price + ")";
+                "(NAME, PRICE) VALUES (\"" + product.getName() + "\"," + product.getPrice() + ")";
         executeUpdate(sql);
     }
 
@@ -70,11 +70,11 @@ public class CommonDAO {
 
     public static int selectFromProductTableBySum() {
         String sql = "SELECT SUM(price) FROM PRODUCT";
-        return (int) executeQuery(sql, true).get(0).price;
+        return (int) executeQuery(sql, true).get(0).getPrice();
     }
 
     public static int selectFromProductTableByCount() {
         String sql = "SELECT COUNT(*) FROM PRODUCT";
-        return (int) executeQuery(sql, true).get(0).price;
+        return (int) executeQuery(sql, true).get(0).getPrice();
     }
 }

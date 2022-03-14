@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class QueryServlet extends AbstractHtmlServlet {
     @Override
-    protected CommonDTO getCommonDTO(HttpServletRequest request) {
+    protected CommonDTO action(HttpServletRequest request) {
         String command = request.getParameter("command");
         switch (command) {
             case "max":

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class GetProductsServlet extends AbstractHtmlServlet {
     @Override
-    protected CommonDTO getCommonDTO(HttpServletRequest request) {
+    protected CommonDTO action(HttpServletRequest request) {
         return new CommonDTO(
                 "",
                 CommonDAO.selectAllFromProductTable()

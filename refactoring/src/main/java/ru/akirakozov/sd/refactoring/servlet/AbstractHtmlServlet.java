@@ -11,27 +11,28 @@ import java.io.IOException;
 public abstract class AbstractHtmlServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        write(response, getCommonDTO(request));
+        CommonDTO data = action(request);
+        write(response, data);
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
-    protected abstract CommonDTO getCommonDTO(HttpServletRequest request);
+    protected abstract CommonDTO action(HttpServletRequest request);
 
     private static void write(HttpServletResponse response, CommonDTO data) throws IOException {
-        if (data.products != null || data.value != null) {
+        if (data.getProducts() != null || data.getValue() != null) {
             response.getWriter().println("<html><body>");
-            response.getWriter().print(data.message);
-            if (data.products != null) {
-                for (Product product : data.products) {
-                    response.getWriter().println(product.name + "\t" + product.price + "</br>");
+            response.getWriter().print(data.getMessage());
+            if (data.getProducts() != null) {
+                for (Product product : data.getProducts()) {
+                    response.getWriter().println(product.getName() + "\t" + product.getPrice() + "</br>");
                 }
             } else {
-                response.getWriter().println(data.value);
+                response.getWriter().println(data.getValue());
             }
             response.getWriter().println("</body></html>");
-            return;
+        } else {
+            response.getWriter().print(data.getMessage());
         }
-        response.getWriter().print(data.message);
     }
 }
