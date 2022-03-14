@@ -1,65 +1,40 @@
 package ru.akirakozov.sd.refactoring.servlet;
 
 import ru.akirakozov.sd.refactoring.dao.CommonDAO;
-import ru.akirakozov.sd.refactoring.model.Product;
+import ru.akirakozov.sd.refactoring.dto.CommonDTO;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
 
 /**
  * @author akirakozov
  */
-public class QueryServlet extends HttpServlet {
+public class QueryServlet extends AbstractHtmlServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected CommonDTO getCommonDTO(HttpServletRequest request) {
         String command = request.getParameter("command");
-        boolean isAnswer = false;
-
-        if ("max".equals(command)) {
-            response.getWriter().println("<html><body>");
-            response.getWriter().println("<h1>Product with max price: </h1>");
-            List<Product> products = CommonDAO.selectFromProductTableByMax();
-            for (Product product : products) {
-                response.getWriter().println(product.name + "\t" + product.price + "</br>");
-            }
-            response.getWriter().println("</body></html>");
-            isAnswer = true;
+        switch (command) {
+            case "max":
+                return new CommonDTO(
+                        "<h1>Product with max price: </h1>\n",
+                        CommonDAO.selectFromProductTableByMax()
+                );
+            case "min":
+                return new CommonDTO(
+                        "<h1>Product with min price: </h1>\n",
+                        CommonDAO.selectFromProductTableByMin()
+                );
+            case "sum":
+                return new CommonDTO(
+                        "Summary price: \n",
+                        CommonDAO.selectFromProductTableBySum()
+                );
+            case "count":
+                return new CommonDTO(
+                        "Number of products: \n",
+                        CommonDAO.selectFromProductTableByCount()
+                );
+            default:
+                return new CommonDTO("Unknown command: " + command + "\n");
         }
-        if ("min".equals(command)) {
-            response.getWriter().println("<html><body>");
-            response.getWriter().println("<h1>Product with min price: </h1>");
-            List<Product> products = CommonDAO.selectFromProductTableByMin();
-            for (Product product : products) {
-                response.getWriter().println(product.name + "\t" + product.price + "</br>");
-            }
-            response.getWriter().println("</body></html>");
-            isAnswer = true;
-        }
-        if ("sum".equals(command)) {
-            response.getWriter().println("<html><body>");
-            response.getWriter().println("Summary price: ");
-            int result = CommonDAO.selectFromProductTableBySum();
-            response.getWriter().println(result);
-            response.getWriter().println("</body></html>");
-            isAnswer = true;
-        }
-        if ("count".equals(command)) {
-            response.getWriter().println("<html><body>");
-            response.getWriter().println("Number of products: ");
-            int result = CommonDAO.selectFromProductTableByCount();
-            response.getWriter().println(result);
-            response.getWriter().println("</body></html>");
-            isAnswer = true;
-        }
-        if (!isAnswer) {
-            response.getWriter().println("Unknown command: " + command);
-        }
-
-        response.setContentType("text/html");
-        response.setStatus(HttpServletResponse.SC_OK);
     }
-
 }

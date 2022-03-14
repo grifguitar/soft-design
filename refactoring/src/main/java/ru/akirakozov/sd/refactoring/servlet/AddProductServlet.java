@@ -1,20 +1,17 @@
 package ru.akirakozov.sd.refactoring.servlet;
 
 import ru.akirakozov.sd.refactoring.dao.CommonDAO;
+import ru.akirakozov.sd.refactoring.dto.CommonDTO;
 import ru.akirakozov.sd.refactoring.model.Product;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * @author akirakozov
  */
-public class AddProductServlet extends HttpServlet {
-
+public class AddProductServlet extends AbstractHtmlServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected CommonDTO getCommonDTO(HttpServletRequest request) {
         Product product = new Product(
                 request.getParameter("name"),
                 Long.parseLong(request.getParameter("price"))
@@ -22,8 +19,6 @@ public class AddProductServlet extends HttpServlet {
 
         CommonDAO.insertIntoProductTable(product);
 
-        response.setContentType("text/html");
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println("OK");
+        return new CommonDTO("OK\n");
     }
 }
