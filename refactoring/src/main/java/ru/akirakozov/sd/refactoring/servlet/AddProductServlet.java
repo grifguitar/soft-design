@@ -1,6 +1,7 @@
 package ru.akirakozov.sd.refactoring.servlet;
 
 import ru.akirakozov.sd.refactoring.dao.CommonDAO;
+import ru.akirakozov.sd.refactoring.model.Product;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,14 +15,12 @@ public class AddProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String name = request.getParameter("name");
-        long price = Long.parseLong(request.getParameter("price"));
+        Product product = new Product(
+                request.getParameter("name"),
+                Long.parseLong(request.getParameter("price"))
+        );
 
-        try {
-            CommonDAO.insertIntoProductTable(name, price);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        CommonDAO.insertIntoProductTable(product);
 
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
