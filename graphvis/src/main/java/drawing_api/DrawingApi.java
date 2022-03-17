@@ -1,11 +1,23 @@
 package drawing_api;
 
+import drawing_api.component.Point;
+
 public interface DrawingApi {
-    long getDrawingAreaWidth();
+    int SHIFT = 50;
 
-    long getDrawingAreaHeight();
+    String TITLE = "Graph Visualizer by Grigoriy Khlytin";
 
-    void drawCircle();
+    static int getWidth() {
+        return 800;
+    }
 
-    void drawLine();
+    static int getHeight() {
+        return 800;
+    }
+
+    void drawCircle(Point<Double> point, double r);
+
+    void drawLine(Point<Double> from, Point<Double> to);
+
+    void run();
 }
