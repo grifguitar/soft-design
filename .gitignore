@@ -27,3 +27,5 @@ refactoring/test.db
 
 target/
 
+*.iml
+
