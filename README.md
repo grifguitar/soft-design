@@ -11,4 +11,5 @@
 ### Лабораторные работы (8 семестр):
 
 + [lab4: docker-containers](https://github.com/grifguitar/soft-design/tree/main/docker-containers)
++ [lab2: reactive](https://github.com/grifguitar/soft-design/tree/main/reactive)
 
