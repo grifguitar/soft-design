@@ -43,4 +43,4 @@
 
 ## Tests:
 
-![img](https://github.com/grifguitar/soft-design/blob/main/event-sourcing/log.tif)
+![log](https://github.com/grifguitar/soft-design/blob/main/event-sourcing/log.pdf)
