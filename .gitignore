@@ -29,3 +29,7 @@ target/
 
 *.iml
 
+actors/
+event-sourcing/
+reactive/
+
