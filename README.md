@@ -12,4 +12,5 @@
 
 + [lab4: docker-containers](https://github.com/grifguitar/soft-design/tree/main/docker-containers)
 + [lab2: reactive](https://github.com/grifguitar/soft-design/tree/main/reactive)
++ [lab3: event-sourcing](https://github.com/grifguitar/soft-design/tree/main/event-sourcing)
 
